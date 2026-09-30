@@ -1,0 +1,29 @@
+name: iOS CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build and test
+        run: >-
+          xcodebuild test
+          -project TuneDeck.xcodeproj
+          -scheme TuneDeck
+          -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest'
