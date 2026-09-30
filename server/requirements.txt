@@ -1,0 +1,2 @@
+# "default" pulls in yt-dlp-ejs, which YouTube extraction needs (alongside a JS runtime such as Deno).
+yt-dlp[default]
